@@ -1,4 +1,4 @@
-package com.dojo.newprojectdojo.controller;
+package com.dojo.newprojectdojo.controllers;
 
 import com.dojo.newprojectdojo.entities.User;
 import org.springframework.http.ResponseEntity;
