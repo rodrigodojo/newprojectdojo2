@@ -1,5 +1,6 @@
 package com.dojo.newprojectdojo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Order implements Serializable {
     private Long id;
     private Instant moment;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
