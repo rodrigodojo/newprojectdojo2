@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_category")
@@ -24,4 +24,10 @@ public class Category implements Serializable {
     private Integer id;
     private String name;
 
+    private Set<Product> products = new HashSet<>();
+
+    public Category(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

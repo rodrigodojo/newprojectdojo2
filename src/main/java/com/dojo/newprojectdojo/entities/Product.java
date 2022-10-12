@@ -7,14 +7,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_order")
+@Table(name = "tb_product")
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -26,6 +27,16 @@ public class Product implements Serializable {
     private String description;
     private Double price;
     private String imgUrl;
+
+    private Set<Category> categories = new HashSet<>();
+
+    public Product(Integer id, String name, String description, Double price, String imgUrl) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.imgUrl = imgUrl;
+    }
 
     @Override
     public boolean equals(Object o) {
