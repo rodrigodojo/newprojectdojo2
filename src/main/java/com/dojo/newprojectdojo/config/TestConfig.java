@@ -1,8 +1,10 @@
 package com.dojo.newprojectdojo.config;
 
+import com.dojo.newprojectdojo.entities.Category;
 import com.dojo.newprojectdojo.entities.Order;
 import com.dojo.newprojectdojo.entities.User;
 import com.dojo.newprojectdojo.entities.enums.OrderStatus;
+import com.dojo.newprojectdojo.repositories.CategoryRepository;
 import com.dojo.newprojectdojo.repositories.OrderRepository;
 import com.dojo.newprojectdojo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Override
     public void run(String... args) throws Exception {
        User u1 = new User(null,"rodrigo teste","rodrigo@test.com","123456789","xpto");
@@ -35,5 +40,12 @@ public class TestConfig implements CommandLineRunner {
        Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.DELIVERED, u1);
 
        orderRepository.saveAll(Arrays.asList(o1,o2,o3));
+
+       Category cat1 = new Category(null, "Electronics");
+       Category cat2 = new Category(null, "Books");
+       Category cat3 = new Category(null, "Computers");
+
+       categoryRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
+
     }
 }
