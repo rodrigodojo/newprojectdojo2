@@ -24,6 +24,7 @@ public class Category implements Serializable {
     private Integer id;
     private String name;
 
+    @Transient
     private Set<Product> products = new HashSet<>();
 
     public Category(Integer id, String name) {

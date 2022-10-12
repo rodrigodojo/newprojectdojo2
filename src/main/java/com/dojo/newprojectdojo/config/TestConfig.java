@@ -7,6 +7,7 @@ import com.dojo.newprojectdojo.entities.User;
 import com.dojo.newprojectdojo.entities.enums.OrderStatus;
 import com.dojo.newprojectdojo.repositories.CategoryRepository;
 import com.dojo.newprojectdojo.repositories.OrderRepository;
+import com.dojo.newprojectdojo.repositories.ProductRepository;
 import com.dojo.newprojectdojo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -28,6 +29,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -54,6 +58,6 @@ public class TestConfig implements CommandLineRunner {
        Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
        Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
 
-
+       productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
     }
 }
