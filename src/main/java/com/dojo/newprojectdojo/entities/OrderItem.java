@@ -1,18 +1,16 @@
 package com.dojo.newprojectdojo.entities;
 
 import com.dojo.newprojectdojo.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-@Getter
-@Setter
+
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_order_item")
@@ -20,7 +18,7 @@ public class OrderItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
     private Integer quantity;
     private Double price;
 
@@ -31,6 +29,7 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore
     public Order getOrder(){
         return id.getOrder();
     }
@@ -45,6 +44,22 @@ public class OrderItem implements Serializable {
 
     public void setProduct(Product product){
         id.setProduct(product);
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     @Override

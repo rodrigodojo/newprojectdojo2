@@ -4,11 +4,14 @@ import com.dojo.newprojectdojo.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Getter
@@ -33,6 +36,9 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
 
     public Order(Integer id, Instant moment, OrderStatus orderStatus, User client) {
         this.id = id;
@@ -59,6 +65,10 @@ public class Order implements Serializable {
 
     public OrderStatus getOrderStatus() {
         return OrderStatus.valueOf(orderStatus);
+    }
+
+    public Set<OrderItem> getItens(){
+        return items;
     }
 
     public void setOrderStatus(OrderStatus orderStatus) {
