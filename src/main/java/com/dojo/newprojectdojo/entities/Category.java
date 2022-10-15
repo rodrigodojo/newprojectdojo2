@@ -1,5 +1,6 @@
 package com.dojo.newprojectdojo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +25,8 @@ public class Category implements Serializable {
     private Integer id;
     private String name;
 
-    @Transient
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
 
     public Category(Integer id, String name) {
