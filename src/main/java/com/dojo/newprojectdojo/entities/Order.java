@@ -46,8 +46,8 @@ public class Order implements Serializable {
     public Order(Integer id, Instant moment, OrderStatus orderStatus, User client) {
         this.id = id;
         this.moment = moment;
-        setOrderStatus(orderStatus);
         this.client = client;
+        setOrderStatus(orderStatus);
     }
 
     public Integer getId() {
@@ -64,6 +64,14 @@ public class Order implements Serializable {
 
     public void setMoment(Instant moment) {
         this.moment = moment;
+    }
+
+    public Double getTotal(){
+        double sum = 0.0;
+        for(OrderItem orderItem : items){
+            sum += orderItem.getSubTotal();
+        }
+        return sum;
     }
 
     public OrderStatus getOrderStatus() {
