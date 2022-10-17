@@ -4,6 +4,7 @@ import com.dojo.newprojectdojo.entities.User;
 import com.dojo.newprojectdojo.repositories.UserRepository;
 import com.dojo.newprojectdojo.services.exceptions.DatabaseException;
 import com.dojo.newprojectdojo.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -42,9 +43,13 @@ public class UserService {
     }
 
     public User update(Long Id,User obj){
-        User user = userRepository.getReferenceById(Id);
-        updateData(user,obj);
-        return userRepository.save(user);
+        try {
+            User user = userRepository.getReferenceById(Id);
+            updateData(user, obj);
+            return userRepository.save(user);
+        }catch (EntityNotFoundException e){
+            throw new ResourceNotFoundException(Id);
+        }
     }
 
     private void updateData(User user, User obj) {
