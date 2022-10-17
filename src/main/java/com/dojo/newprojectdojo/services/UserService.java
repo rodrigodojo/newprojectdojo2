@@ -2,8 +2,10 @@ package com.dojo.newprojectdojo.services;
 
 import com.dojo.newprojectdojo.entities.User;
 import com.dojo.newprojectdojo.repositories.UserRepository;
+import com.dojo.newprojectdojo.services.exceptions.DatabaseException;
 import com.dojo.newprojectdojo.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -33,9 +35,10 @@ public class UserService {
         try {
             userRepository.deleteById(Id);
         }catch (EmptyResultDataAccessException e){
-           throw new ResourceNotFoundException(Id);
+            throw new ResourceNotFoundException(Id);
+        }catch (DataIntegrityViolationException e){
+            throw new DatabaseException(e.getMessage());
         }
-
     }
 
     public User update(Long Id,User obj){
