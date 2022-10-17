@@ -29,7 +29,12 @@ public class UserService {
     }
 
     public void delete(Long Id){
-        userRepository.deleteById(Id);
+        try {
+            userRepository.deleteById(Id);
+        }catch (RuntimeException e){
+            e.printStackTrace();
+        }
+
     }
 
     public User update(Long Id,User obj){
