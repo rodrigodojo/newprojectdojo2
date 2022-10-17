@@ -4,6 +4,7 @@ import com.dojo.newprojectdojo.entities.User;
 import com.dojo.newprojectdojo.repositories.UserRepository;
 import com.dojo.newprojectdojo.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,8 +32,8 @@ public class UserService {
     public void delete(Long Id){
         try {
             userRepository.deleteById(Id);
-        }catch (RuntimeException e){
-            e.printStackTrace();
+        }catch (EmptyResultDataAccessException e){
+           throw new ResourceNotFoundException(Id);
         }
 
     }
