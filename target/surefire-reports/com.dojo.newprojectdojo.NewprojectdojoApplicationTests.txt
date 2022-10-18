@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.dojo.newprojectdojo.NewprojectdojoApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.954 s - in com.dojo.newprojectdojo.NewprojectdojoApplicationTests
